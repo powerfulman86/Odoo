@@ -1,0 +1,4 @@
+to start service from command 
+
+./odoo-bin --addons-path=addons,extra,enterprise,odoo/addons -u Miraity_Custom —xmlrpc-port=8088
+
