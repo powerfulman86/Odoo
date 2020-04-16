@@ -18,3 +18,13 @@ create database erp;
 							
 <<<<    restore database    >>>>
 psql erptest < /DbBackup/dump.sql
+
+
+<<<< For password less login:    >>>>
+
+sudo -u user_name psql db_name
+
+<<<< To reset the password if you have forgotten:    >>>>
+
+ALTER USER user_name WITH PASSWORD 'new_password';
+
