@@ -88,6 +88,11 @@ echo -e "\n---- Installing nodeJS NPM and rtlcss for LTR support ----"
 sudo apt-get install nodejs npm -y
 sudo npm install -g rtlcss
 
+ echo -e "\n---- Installing Enterprise specific libraries ----"
+ sudo pip3 install num2words ofxparse dbfread ebaysdk firebase_admin pyOpenSSL
+ sudo npm install -g less
+ sudo npm install -g less-plugin-clean-css
+    
 #--------------------------------------------------
 # Install Wkhtmltopdf if needed
 #--------------------------------------------------
@@ -141,10 +146,6 @@ if [ $IS_ENTERPRISE = "True" ]; then
     done
 
     echo -e "\n---- Added Enterprise code under $OE_HOME/enterprise/addons ----"
-    echo -e "\n---- Installing Enterprise specific libraries ----"
-    sudo pip3 install num2words ofxparse dbfread ebaysdk firebase_admin pyOpenSSL
-    sudo npm install -g less
-    sudo npm install -g less-plugin-clean-css
 fi
 
 echo -e "\n---- Create custom module directory ----"
@@ -155,8 +156,6 @@ echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
 echo -e "* Create server config file"
-
-
 sudo touch /etc/${OE_CONFIG}.conf
 echo -e "* Creating server config file"
 sudo su root -c "printf '[options] \n; This is the password that allows database operations:\n' >> /etc/${OE_CONFIG}.conf"
