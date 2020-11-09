@@ -360,6 +360,7 @@ if [ $INSTALL_WEBMIN = "True" ]; then
     echo -e "\n---- Installing and setting up WebMin ----"
     apt-get install -y perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions python
     wget http://prdownloads.sourceforge.net/webadmin/webmin_1.954_all.deb
+    sudo gdebi webmin_1.954_all.deb
 fi
 
 echo -e "* Starting Odoo Service"
