@@ -131,10 +131,6 @@ sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 touch /var/log/$OE_USER/odoo-server.log
 sudo chown $OE_USER:$OE_USER /var/log/$OE_USER/odoo-server.log
 
-echo "---------------------------odoo configuration directory--------------------------------"
-
-chown odoo:odoo /etc/odoo/odoo.conf
-
 #--------------------------------------------------
 # Install ODOO
 #--------------------------------------------------
