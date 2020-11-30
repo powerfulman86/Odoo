@@ -14,6 +14,7 @@
 OE_USER="odoo"
 OE_HOME="/$OE_USER"
 OE_HOME_EXT="/$OE_USER/${OE_USER}-server"
+OE_CONFIG="${OE_USER}-server"
 # Set to "True" to generate a random password, "False" to use the variable in OE_SUPERADMIN
 GENERATE_RANDOM_PASSWORD="True"
 # Set the superadmin password - if GENERATE_RANDOM_PASSWORD is set to "True" we will automatically generate a random password, otherwise we use this one
@@ -28,7 +29,8 @@ INSTALL_WKHTMLTOPDF="True"
 IS_ENTERPRISE="True"
 # Set this to True if you want to install Webmin!
 INSTALL_WEBMIN="True"
-
+# Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
+OE_PORT="8069"
 
 ###  WKHTMLTOPDF download links
 ## === Ubuntu Trusty x64 & x32 === (for other distributions please replace these two links,
@@ -140,6 +142,9 @@ sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/odoo/odoo $
 echo -e "\n---- Create custom module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom"
 
+echo -e "\n---- Create enterprise module directory ----"
+sudo su $OE_USER -c "mkdir $OE_HOME/enterprise"
+
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
@@ -156,6 +161,11 @@ if [ $OE_VERSION >= "12.0" ]; then
     sudo su root -c "printf 'http_port = ${OE_PORT}\n' >> /etc/${OE_CONFIG}.conf"
 else
     sudo su root -c "printf 'xmlrpc_port = ${OE_PORT}\n' >> /etc/${OE_CONFIG}.conf"
+fi
+if [ $IS_ENTERPRISE = "True" ]; then
+    sudo su root -c "printf 'addons_path=${OE_HOME}/enterprise,${OE_HOME_EXT}/addons,${OE_HOME}/custom\n' >> /etc/${OE_CONFIG}.conf"
+else
+    sudo su root -c "printf 'addons_path=${OE_HOME_EXT}/addons,${OE_HOME}/custom\n' >> /etc/${OE_CONFIG}.conf"
 fi
 sudo su root -c "printf 'logfile = /var/log/${OE_USER}/${OE_CONFIG}.log\n' >> /etc/${OE_CONFIG}.conf"
 sudo chown $OE_USER:$OE_USER /etc/${OE_CONFIG}.conf
