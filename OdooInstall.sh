@@ -27,10 +27,16 @@ OE_VERSION="13.0"
 INSTALL_WKHTMLTOPDF="True"
 # Set this to True if you want to install Odoo 9 10 11 Enterprise! ( you can use enterprise normaly too ;) )
 IS_ENTERPRISE="True"
-# Set this to True if you want to install Webmin!
-INSTALL_WEBMIN="True"
+# Set this to True if you want to install Nginx!
+INSTALL_NGINX="True"
+# Set the website name
+WEBSITE_NAME="_"
 # Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8069"
+# Set this to True if you want to install Webmin!
+INSTALL_WEBMIN="True"
+
+
 
 ###  WKHTMLTOPDF download links
 ## === Ubuntu Trusty x64 & x32 === (for other distributions please replace these two links,
