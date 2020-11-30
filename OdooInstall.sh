@@ -343,7 +343,7 @@ if [ $INSTALL_WEBMIN = "True" ]; then
     wget http://www.webmin.com/jcameron-key.asc
     sudo apt-key add jcameron-key.asc
     sudo apt update
-    sudo apt install webmin
+    sudo apt install webmin -y
 fi
 
 echo -e "* Starting Odoo Service"
