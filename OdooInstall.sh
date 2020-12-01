@@ -30,7 +30,7 @@ IS_ENTERPRISE="True"
 # Set this to True if you want to install Nginx!
 INSTALL_NGINX="True"
 # Set the website name
-WEBSITE_NAME="_"
+WEBSITE_NAME="arafa.cubicit-eg.com"
 # Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8069"
 # Set this to True if you want to install Webmin!
@@ -101,7 +101,7 @@ if [ $INSTALL_WKHTMLTOPDF = "True" ]; then
   ## https://www.odoo.com/documentation/8.0/setup/install.html#deb ):
   WKHTMLTOX_X64=https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_amd64.deb
   WKHTMLTOX_X32=https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_i386.deb
-  
+
   echo -e "\n---- Install wkhtml and place shortcuts on correct place for ODOO 9 ----"
   #pick up correct one from x64 & x32 versions:
   if [ "`getconf LONG_BIT`" == "64" ];then
@@ -145,8 +145,8 @@ sudo adduser $OE_USER sudo
 echo -e "\n---- Create Log directory ----"
 sudo mkdir /var/log/$OE_USER
 sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
-touch /var/log/$OE_USER/odoo-server.log
-sudo chown $OE_USER:$OE_USER /var/log/$OE_USER/odoo-server.log
+touch /var/log/$OE_USER/${OE_USER}-server.log
+sudo chown $OE_USER:$OE_USER /var/log/$OE_USER/${OE_USER}-server.log
 
 #--------------------------------------------------
 # Install ODOO
