@@ -33,6 +33,8 @@ INSTALL_NGINX="True"
 WEBSITE_NAME="_"
 # Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8069"
+# Set the default Odoo longpolling port (you still have to use -c /etc/odoo-server.conf for example to use this.)
+LONGPOLLING_PORT="8072"
 # Set this to True if you want to install Webmin!
 INSTALL_WEBMIN="True"
 # Set this to True if you want to install CertBot SSL Certification!
