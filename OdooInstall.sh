@@ -30,7 +30,7 @@ IS_ENTERPRISE="True"
 # Set this to True if you want to install Nginx!
 INSTALL_NGINX="True"
 # Set the website name
-WEBSITE_NAME="arafa.cubicit-eg.com"
+WEBSITE_NAME="_"
 # Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8069"
 # Set this to True if you want to install Webmin!
