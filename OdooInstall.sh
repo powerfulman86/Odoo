@@ -86,14 +86,14 @@ echo -e "\n--- Install other required packages"
 sudo apt-get install node-clean-css -y
 sudo apt-get install node-less -y
 sudo apt-get install python-gevent -y
-apt-get install libwww-perl -y
+sudo apt-get install libwww-perl -y
 #sudo apt install ifupdown -y
 
 echo -e "\n---- Installing nodeJS NPM and rtlcss for LTR support ----"
 sudo apt-get install nodejs npm -y
 sudo npm install -g less
 sudo npm install -g less-plugin-clean-css
-sudo npm install -g rtlcss
+sudo npm install -g rtlcss@2.6.2
 
 #--------------------------------------------------
 # Install Wkhtmltopdf if needed
