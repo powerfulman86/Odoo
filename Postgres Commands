@@ -9,16 +9,17 @@ FROM pg_stat_activity
 WHERE pg_stat_activity.datname = 'erp' -- ← change this to your DB
   AND pid <> pg_backend_pid();
 							
-							
 <<<<    drop database    >>>>
 drop database erp;					
 							
 <<<< create database    >>>>
 create database erp;					
-							
+			
+<<<< create backup    >>>>
+pg_dump erp > /DbBackup/erp.bak
+
 <<<<    restore database    >>>>
 psql erptest < /DbBackup/dump.sql
-
 
 <<<< For password less login:    >>>>
 
