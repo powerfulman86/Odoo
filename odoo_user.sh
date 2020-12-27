@@ -53,6 +53,9 @@ sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 touch /var/log/$OE_USER/${OE_USER}-server.log
 sudo chown $OE_USER:$OE_USER /var/log/$OE_USER/${OE_USER}-server.log
 
+echo -e "\n---- Create Server Directory ----"
+sudo su $OE_USER -c "mkdir $OE_HOME/$OE_HOME_EXT"
+
 echo -e "\n---- Create custom module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom"
 
@@ -167,14 +170,14 @@ sudo mv ~/$OE_CONFIG /etc/init.d/$OE_CONFIG
 sudo chmod 755 /etc/init.d/$OE_CONFIG
 sudo chown root: /etc/init.d/$OE_CONFIG
 
-echo -e "* Start ODOO on Startup"
+echo -e "* Start $OE_USER on Startup"
 sudo update-rc.d $OE_CONFIG defaults
 
 #--------------------------------------------------
 # Add to Nginx if needed
 #--------------------------------------------------
 if [ $ADDTO_NGINX = "True" ]; then
-  cat <<EOF > ~/OE_USER
+  cat <<EOF > ~/$OE_USER
   server {
   listen 80;
 
