@@ -19,6 +19,8 @@ OE_CONFIG="${OE_USER}-server"
 GENERATE_RANDOM_PASSWORD="True"
 # Set the superadmin password - if GENERATE_RANDOM_PASSWORD is set to "True" we will automatically generate a random password, otherwise we use this one
 OE_SUPERADMIN="admin"
+# Set this to True if you want to install Odoo 9 10 11 Enterprise! ( you can use enterprise normaly too ;) )
+IS_ENTERPRISE="True"
 # Set the website name
 WEBSITE_NAME="_"
 # Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
@@ -54,7 +56,7 @@ touch /var/log/$OE_USER/${OE_USER}-server.log
 sudo chown $OE_USER:$OE_USER /var/log/$OE_USER/${OE_USER}-server.log
 
 echo -e "\n---- Create Server Directory ----"
-sudo su $OE_USER -c "mkdir $OE_HOME/$OE_HOME_EXT"
+sudo su $OE_USER -c "mkdir $OE_HOME/${OE_USER}-server"
 
 echo -e "\n---- Create custom module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom"
