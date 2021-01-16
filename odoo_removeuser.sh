@@ -31,7 +31,7 @@ sudo su - postgres -c "dropuser -s $OE_USER" 2> /dev/null || true
 
 # remove folder from server
 echo -e "\n---- remove Server Directory ----"
-sudo su $OE_USER -c "rm $OE_HOME"
+sudo su $OE_USER -c "rm -r $OE_HOME"
 
 # remove user
 sudouserdel -r -f $OE_USER
