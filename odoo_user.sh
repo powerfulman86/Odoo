@@ -62,7 +62,9 @@ echo -e "\n---- Create custom module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom"
 
 echo -e "\n---- Create enterprise module directory ----"
-sudo su $OE_USER -c "mkdir $OE_HOME/enterprise"
+if [ $IS_ENTERPRISE = "True" ]; then
+    sudo su $OE_USER -c "mkdir $OE_HOME/enterprise"
+fi
 
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
