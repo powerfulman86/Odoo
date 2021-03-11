@@ -33,7 +33,7 @@ sudo su - postgres -c "dropuser -s $OE_USER" 2> /dev/null || true
 echo -e "\n---- remove Server Directory ----"
 sudo rm /etc/${OE_CONFIG}.conf
 sudo su $OE_USER -c "rm -r /var/log/$OE_USER"
-sudo su $OE_USER -c "rm -r $OE_HOME"
+sudo su $OE_USER -c "rm -rf $OE_HOME"
 
 # remove user
 sudo userdel -r -f $OE_USER
