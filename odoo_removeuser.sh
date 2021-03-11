@@ -36,7 +36,7 @@ sudo su $OE_USER -c "rm -r /var/log/$OE_USER"
 sudo su $OE_USER -c "rm -r $OE_HOME"
 
 # remove user
-sudouserdel -r -f $OE_USER
+sudo userdel -r -f $OE_USER
 
 # Update Server
 echo -e "\n---- Update Server ----"
