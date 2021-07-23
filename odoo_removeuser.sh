@@ -12,8 +12,6 @@
 OE_USER="odoo"
 OE_HOME="/$OE_USER"
 OE_CONFIG="${OE_USER}-server"
-# Set the website name
-WEBSITE_NAME="_"
 
 # remove website from nginx
 echo -e "\n---- 1st remove website from nginx  ----"
