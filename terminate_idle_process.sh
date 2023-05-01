@@ -20,3 +20,29 @@ do
         kill -9 $id
     fi
 done
+
+#!/bin/bash
+
+# Define the idle time threshold in seconds
+IDLE_TIME_THRESHOLD=600
+
+# Get the list of all running processes
+PROCESS_LIST=$(ps -eo pid,stat,start_time,args)
+
+# Loop through each process
+while read -r LINE; do
+  # Extract the process ID, start time, and status from the process list
+  PID=$(echo "$LINE" | awk '{print $1}')
+  START_TIME=$(echo "$LINE" | awk '{print $3}')
+  STATUS=$(echo "$LINE" | awk '{print $2}')
+
+  # Calculate the idle time for the process in seconds
+  ELAPSED_TIME=$(( $(date +%s) - $(date -d "$START_TIME" +%s) ))
+
+  # Check if the process is idle for more than the threshold
+  if [ "$STATUS" == "S" ] && [ "$ELAPSED_TIME" -gt "$IDLE_TIME_THRESHOLD" ]; then
+    # Terminate the idle process
+    echo "Terminating idle process: $LINE"
+    kill -9 "$PID"
+  fi
+done <<< "$PROCESS_LIST"
