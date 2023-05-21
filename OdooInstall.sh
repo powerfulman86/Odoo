@@ -145,9 +145,7 @@ sudo adduser --system --quiet --shell=/bin/bash --home=$OE_HOME --gecos 'ODOO' -
 sudo adduser $OE_USER sudo
 
 echo -e "\n---- Create Log directory ----"
-sudo mkdir /var/log/$OE_USER
-sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
-touch /var/log/$OE_USER/${OE_USER}-server.log
+touch /var/log/${OE_USER}-server.log
 sudo chown $OE_USER:$OE_USER /var/log/$OE_USER/${OE_USER}-server.log
 
 #--------------------------------------------------
@@ -168,33 +166,33 @@ echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
 echo -e "* Create server config file"
-sudo touch /etc/${OE_CONFIG}.conf
+sudo touch $OE_HOME/${OE_CONFIG}.conf
 echo -e "* Creating server config file"
-sudo su root -c "printf '[options] \n; This is the password that allows database operations:\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf '[options] \n; This is the password that allows database operations:\n' >> $OE_HOME/${OE_CONFIG}.conf"
 if [ $GENERATE_RANDOM_PASSWORD = "True" ]; then
     echo -e "* Generating random admin password"
     OE_SUPERADMIN=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
 fi
-sudo su root -c "printf 'admin_passwd = ${OE_SUPERADMIN}\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'admin_passwd = ${OE_SUPERADMIN}\n' >> $OE_HOME/${OE_CONFIG}.conf"
 if [ $IS_ENTERPRISE = "True" ]; then
-    sudo su root -c "printf 'addons_path=${OE_HOME_EXT}/addons,${OE_HOME}/enterprise,${OE_HOME}/custom\n' >> /etc/${OE_CONFIG}.conf"
+    sudo su root -c "printf 'addons_path=${OE_HOME_EXT}/addons,${OE_HOME}/enterprise,${OE_HOME}/custom\n' >> $OE_HOME/${OE_CONFIG}.conf"
 else
-    sudo su root -c "printf 'addons_path=${OE_HOME_EXT}/addons,${OE_HOME}/custom\n' >> /etc/${OE_CONFIG}.conf"
+    sudo su root -c "printf 'addons_path=${OE_HOME_EXT}/addons,${OE_HOME}/custom\n' >> $OE_HOME/${OE_CONFIG}.conf"
 fi
 if [ $OE_VERSION >= "12.0" ]; then
-    sudo su root -c "printf 'http_port = ${OE_PORT}\n' >> /etc/${OE_CONFIG}.conf"
+    sudo su root -c "printf 'http_port = ${OE_PORT}\n' >> $OE_HOME/${OE_CONFIG}.conf"
 else
-    sudo su root -c "printf 'xmlrpc_port = ${OE_PORT}\n' >> /etc/${OE_CONFIG}.conf"
+    sudo su root -c "printf 'xmlrpc_port = ${OE_PORT}\n' >> $OE_HOME/${OE_CONFIG}.conf"
 fi
-sudo su root -c "printf 'longpolling_port = ${LONGPOLLING_PORT}\n' >> /etc/${OE_CONFIG}.conf"
-sudo su root -c "printf 'list_db = True\n' >> /etc/${OE_CONFIG}.conf"
-sudo su root -c "printf 'logfile = /var/log/${OE_USER}/${OE_CONFIG}.log\n' >> /etc/${OE_CONFIG}.conf"
-sudo chown $OE_USER:$OE_USER /etc/${OE_CONFIG}.conf
-sudo chmod 640 /etc/${OE_CONFIG}.conf
+sudo su root -c "printf 'longpolling_port = ${LONGPOLLING_PORT}\n' >> $OE_HOME/${OE_CONFIG}.conf"
+sudo su root -c "printf 'list_db = True\n' >> $OE_HOME/${OE_CONFIG}.conf"
+sudo su root -c "printf 'logfile = /var/log/${OE_CONFIG}.log\n' >> $OE_HOME/${OE_CONFIG}.conf"
+sudo chown $OE_USER:$OE_USER $OE_HOME/${OE_CONFIG}.conf
+sudo chmod 640 $OE_HOME/${OE_CONFIG}.conf
 
 echo -e "* Create startup file"
 sudo su root -c "echo '#!/bin/sh' >> $OE_HOME_EXT/start.sh"
-sudo su root -c "echo 'sudo -u $OE_USER $OE_HOME_EXT/odoo-bin --config=/etc/${OE_CONFIG}.conf' >> $OE_HOME_EXT/start.sh"
+sudo su root -c "echo 'sudo -u $OE_USER $OE_HOME_EXT/odoo-bin --config=$OE_HOME/${OE_CONFIG}.conf' >> $OE_HOME_EXT/start.sh"
 sudo chmod 755 $OE_HOME_EXT/start.sh
 
 #--------------------------------------------------
@@ -222,7 +220,7 @@ DESC=$OE_CONFIG
 # Specify the user name (Default: odoo).
 USER=$OE_USER
 # Specify an alternate config file (Default: /etc/openerp-server.conf).
-CONFIGFILE="/etc/${OE_CONFIG}.conf"
+CONFIGFILE="$OE_HOME/${OE_CONFIG}.conf"
 # pidfile
 PIDFILE=/var/run/\${NAME}.pid
 # Additional options that are passed to the Daemon.
@@ -359,9 +357,9 @@ EOF
   sudo ln -s /etc/nginx/sites-available/odoo /etc/nginx/sites-enabled/odoo
   sudo rm /etc/nginx/sites-enabled/default
   sudo service nginx reload
-  sudo su root -c "printf 'proxy_mode = True\n' >> /etc/${OE_CONFIG}.conf"
-  sudo su root -c "printf 'limit_request = 8192\n' >> /etc/${OE_CONFIG}.conf"
-  sudo su root -c "printf 'workers = 2\n' >> /etc/${OE_CONFIG}.conf"
+  sudo su root -c "printf 'proxy_mode = True\n' >> $OE_HOME/${OE_CONFIG}.conf"
+  sudo su root -c "printf 'limit_request = 8192\n' >> $OE_HOME/${OE_CONFIG}.conf"
+  sudo su root -c "printf 'workers = 2\n' >> $OE_HOME/${OE_CONFIG}.conf"
   echo "Done! The Nginx server is up and running. Configuration can be found at /etc/nginx/sites-available/odoo"
 else
   echo "Nginx isn't installed due to choice of the user!"
