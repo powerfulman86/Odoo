@@ -47,6 +47,15 @@ ADMIN_EMAIL="odoo@example.com"
 # Set this to True if you want to install Webmin!
 INSTALL_WEBMIN="True"
 ##
+
+#--------------------------------------------------
+# localization
+#--------------------------------------------------
+echo -e "\n---- localization ----"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+sudo dpkg-reconfigure locales
+
 ###  WKHTMLTOPDF download links
 ## === Ubuntu Trusty x64 & x32 === (for other distributions please replace these two links,
 ## in order to have correct version of wkhtmltopdf installed, for a danger note refer to
