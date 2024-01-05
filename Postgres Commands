@@ -1,9 +1,7 @@
-<<<<    connect to postgres server from command line   >>>>
-psql postgres
+<<<< connect with root password
+sudo -i -u postgres
 
-
-<<<<    kill all sessions to db    >>>>
-
+<<<< kill all sessions to db >>>>
 SELECT pg_terminate_backend(pg_stat_activity.pid)
 FROM pg_stat_activity
 WHERE pg_stat_activity.datname = 'erp' -- ← change this to your DB
@@ -12,20 +10,19 @@ WHERE pg_stat_activity.datname = 'erp' -- ← change this to your DB
 <<<<    drop database    >>>>
 drop database erp;					
 							
-<<<< create database    >>>>
-create database erp;					
+<<<< create database >>>>
+create database erp;
 			
-<<<< create backup    >>>>
+<<<< create backup >>>>
 pg_dump erp > /DbBackup/erp.bak
 
-<<<<    restore database    >>>>
+<<<< restore database >>>>
 psql erptest < /DbBackup/dump.sql
 
-<<<< For password less login:    >>>>
-
+<<<< For password less login: >>>>
 sudo -u user_name psql db_name
+psql postgres
 
 <<<< To reset the password if you have forgotten:    >>>>
-
 ALTER USER user_name WITH PASSWORD 'new_password';
 
