@@ -1,6 +1,16 @@
 <<<< connect with root password
 sudo -i -u postgres
 
+<<<< login with postgres user without password: >>>>
+sudo -u postgres psql
+
+<<<< For password less login: >>>>
+sudo -u user_name psql db_name
+psql postgres
+
+<<<< To reset the password if you have forgotten:    >>>>
+ALTER USER user_name WITH PASSWORD 'new_password';
+
 <<<< kill all sessions to db >>>>
 SELECT pg_terminate_backend(pg_stat_activity.pid)
 FROM pg_stat_activity
@@ -18,11 +28,4 @@ pg_dump erp > /DbBackup/erp.bak
 
 <<<< restore database >>>>
 psql erptest < /DbBackup/dump.sql
-
-<<<< For password less login: >>>>
-sudo -u user_name psql db_name
-psql postgres
-
-<<<< To reset the password if you have forgotten:    >>>>
-ALTER USER user_name WITH PASSWORD 'new_password';
 
