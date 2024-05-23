@@ -35,3 +35,8 @@ pg_dump erp > /DbBackup/erp.bak
 <<<< restore database >>>>
 psql erptest < /DbBackup/dump.sql
 
+<<<< large database restore , must stop auto vaccum
+and reload database configuration>>>>
+alter system set autovacuum = off ;
+SELECT pg_reload_conf();
+
