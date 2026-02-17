@@ -20,7 +20,7 @@ WHERE pg_stat_activity.datname = 'erp' -- ← change this to your DB
 <<<< kill all sessions to db  V 15.0>>>>
 SELECT pg_terminate_backend(pid)
 FROM pg_stat_activity
-WHERE datname = 'erp' -- ← change this to your DB
+WHERE datname = 'ozone14'
 AND leader_pid IS NULL;
 
 <<<<    drop database    >>>>
